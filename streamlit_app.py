@@ -30,7 +30,8 @@ if st.button("Predict"):
     with st.spinner("Predicting..."):
         try:
             prediction = model.forecast(steps=1)
-            st.success(f"💰 Predicted Price: ${float(prediction[0]):.2f}")
+            value = float(prediction.iloc[0])
+            st.success(f"💰 Predicted Price: ${value:.2f}")
         except Exception as e:
             st.error(f"Error: {e}")
 
