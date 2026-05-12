@@ -27,13 +27,17 @@ with col3:
 
 # Button
 if st.button("Predict"):
-    with st.spinner("Predicting..."):
-        try:
-            prediction = model.forecast(steps=steps)
-            value = float(prediction.iloc[0])
-            st.success(f"💰 Predicted Price: ${value:.2f}")
-        except Exception as e:
-            st.error(f"Error: {e}")
+    try:
+        from datetime import datetime
+
+        date = datetime(year, month, day)
+        prediction = model.predict(start=date, end=date)
+
+        value = float(prediction.iloc[0])
+        st.success(f"💰 Predicted Price: ${value:.2f}")
+
+    except Exception as e:
+        st.error(f"Error: {e}")
 
 st.markdown("---")
 st.caption("Note: Prediction is based on historical trends and does not use selected date directly.")
