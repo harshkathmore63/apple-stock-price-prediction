@@ -1,23 +1,33 @@
-import uvicorn
 from fastapi import FastAPI
 import pickle
 from datetime import datetime
+from pydantic import BaseModel
+import pandas as pd
 
 app = FastAPI()
-pickle_in = open("tsmodel.pkl", "rb")
-model=pickle.load(pickle_in)
 
-@app.get('/')
-def index():
-    return {'Deployment': 'Apple Stock Price Prediction'}
+# Load model
+with open("tsmodel.pkl", "rb") as f:
+    model = pickle.load(f)
 
-@app.post('/predict')
-def predict(year:int ,month:int ,day:int):
-    prediction = model.predict([[year,month,day]])
+class InputData(BaseModel):
+    year: int
+    month: int
+    day: int
+
+@app.get("/")
+def home():
+    return {"message": "Apple Stock Prediction API is running"}
+
+@app.post("/predict")
+def predict(data: InputData):
+    dt = datetime(data.year, data.month, data.day)
     
-    return {
-        'prediction': prediction
-    }
+    # Adjust based on your model requirement
+    dt = datetime(data.year, data.month, data.day)
+    prediction = model.predict(start=dt, end=dt)
 
-if __name__ == '__main__':
-    uvicorn.run(app, host='127.0.0.1', port=9000)
+    return {
+        "date": dt.strftime("%Y-%m-%d"),
+        "prediction": float(prediction[0])
+    }
