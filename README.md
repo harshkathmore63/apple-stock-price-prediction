@@ -1,32 +1,22 @@
-# Apple Stock Price Prediction API
+# 📈 Apple Stock Price Prediction
 
-This project predicts Apple stock prices using a trained machine learning model and FastAPI.
+This project predicts the next Apple stock price using a time series forecasting model built with Statsmodels and deployed using Streamlit.
 
-## Features
-- Predict stock price using date input
-- FastAPI-based REST API
-- Pre-trained model using historical data
+## 🚀 Live App
+[Click here to use the app](https://apple-stock-price-prediction-2ywkxve2tupy4x7j7ivxpw.streamlit.app/)
 
-## Tech Stack
+## 🧠 Features
+- Forecast next stock price using historical data
+- Clean and interactive UI built with Streamlit
+- Deployed live on Streamlit Cloud
+
+## 🛠 Tech Stack
 - Python
-- FastAPI
-- Scikit-learn (or your model library)
+- Streamlit
+- Pandas, NumPy
+- Statsmodels (ARIMA / Time Series Model)
 
-## How to Run
+## ⚠️ Note
+The selected date inputs are for UI purposes only. The model forecasts the next available value based on historical trends.
 
-```bash
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-
-
----
-
-## 📦 Step 4: Create requirements.txt
-
-```bash
-touch requirements.txt
-
-fastapi
-uvicorn
-scikit-learn
-pandas
+## 📂 Project Structure

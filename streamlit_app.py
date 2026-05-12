@@ -29,7 +29,7 @@ with col3:
 if st.button("Predict"):
     with st.spinner("Predicting..."):
         try:
-            prediction = model.forecast(steps=1)
+            prediction = model.forecast(steps=steps)
             value = float(prediction.iloc[0])
             st.success(f"💰 Predicted Price: ${value:.2f}")
         except Exception as e:
